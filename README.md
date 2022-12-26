@@ -1,6 +1,7 @@
 # orange-api-server
 
-[TypeScript] API Server for [ts-orangebot](https://gitlab.com/Rim_Earthlights/ts-orangebot) / [speak-voicevox](https://gitlab.com/Rim_Earthlights/speak-voicevox)
+- [TypeScript] API Server for [ts-orangebot](https://gitlab.com/Rim_Earthlights/ts-orangebot) / [speak-voicevox](https://gitlab.com/Rim_Earthlights/speak-voicevox).
+- API Reference: [OpenAPI](https://gitlab.com/Rim_Earthlights/orange-api-server/-/blob/main/openapi.yml)
 
 # Get Ready
 
