@@ -1,0 +1,17 @@
+export const CONFIG = {
+    DEV: true,
+    HOSTNAME: '0.0.0.0',
+    PORT: 53000,
+    HOST_URL: 'http://localhost:port/test/v1',
+    USER: 'webUser',
+    FORECAST_KEY: 'YOUR_FORECAST_KEY',
+    YOUTUBE_API_KEY: 'YOUR_YOUTUBE_API_KEY',
+    DB: {
+        HOSTNAME: 'HOSTNAME',
+        USERNAME: 'USERNAME',
+        DATABASE: 'DBNAME',
+        PASSWORD: 'PASSWORD',
+        PORT: 3306,
+        FLUSH: false
+    }
+};

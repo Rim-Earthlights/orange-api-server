@@ -1,0 +1,60 @@
+openapi: '3.0.2'
+info:
+  title: Orange API Server
+  version: '1.0'
+  description: |-
+    API Server for Orange-Server Discord Bot.
+  contact:
+    email: iris.wind.code@gmail.com
+servers:
+  - url: https://rim-linq.net/orange/v1
+externalDocs:
+  description: git page
+  url: https://gitlab.com/Rim_Earthlights/orange-api-server
+tags:
+  - name: musics
+    description: Control Musics.
+  - name: debug
+    description: Debug Commands.
+paths:
+  /ping:
+    get:
+      tags:
+        - "debug"
+      responses:
+          '200':
+            description: ping success
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/success'
+  /music:
+    get:
+      tags:
+        - "musics"
+      responses:
+        '200':
+          description: OK
+    delete:
+      tags:
+        - "musics"
+      responses:
+        '200':
+          description: delete musics.
+          content:
+            application/json:
+              schema:
+                type: boolean
+                properties:
+                  result:
+                    type: boolean
+                example:
+                  result: true
+components:
+  schemas:
+    success:
+      type: object
+      properties:
+        result:
+          type: boolean
+          example: true
