@@ -3,7 +3,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import 'dayjs/locale/ja';
-import { routers } from './routers';
+import { routers } from './router';
 import { CONFIG } from './config/config';
 
 // express/helmet/cors

@@ -13,5 +13,10 @@ export const CONFIG = {
         PASSWORD: 'PASSWORD',
         PORT: 3306,
         FLUSH: false
+    },
+        S3: {
+        ID: 'AAAAAAAAAAAAAAAAAAAA',
+        SECRET: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
     }
+
 };
