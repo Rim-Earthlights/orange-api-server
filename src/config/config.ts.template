@@ -4,8 +4,6 @@ export const CONFIG = {
     PORT: 53000,
     HOST_URL: 'http://localhost:port/test/v1',
     USER: 'webUser',
-    FORECAST_KEY: 'YOUR_FORECAST_KEY',
-    YOUTUBE_API_KEY: 'YOUR_YOUTUBE_API_KEY',
     DB: {
         HOSTNAME: 'HOSTNAME',
         USERNAME: 'USERNAME',
@@ -14,9 +12,17 @@ export const CONFIG = {
         PORT: 3306,
         FLUSH: false
     },
-        S3: {
-        ID: 'AAAAAAAAAAAAAAAAAAAA',
-        SECRET: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+    FORECAST: {
+        KEY: 'YOUR_FORECAST_KEY'
+    },
+    YOUTUBE: {
+        API_KEY: 'YOUR_YOUTUBE_API_KEY'
+    },
+    S3: {
+        ID: 'YOUR_S3_ID',
+        SECRET: 'YOUR_S3_SECRET'
+    },
+    GITHUB: {
+        TOKEN: 'GITHUB_TOKEN'
     }
-
 };
