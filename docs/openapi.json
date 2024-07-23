@@ -4,12 +4,21 @@
     "/chat/test": {
       "get": {
         "operationId": "ChatController_test",
+        "summary": "Test",
         "parameters": [],
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
           }
-        }
+        },
+        "tags": [
+          "chat"
+        ],
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
       }
     }
   },

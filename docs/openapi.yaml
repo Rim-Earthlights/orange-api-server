@@ -3,10 +3,15 @@ paths:
   /chat/test:
     get:
       operationId: ChatController_test
+      summary: Test
       parameters: []
       responses:
         '200':
-          description: ''
+          description: OK
+      tags:
+        - chat
+      security:
+        - bearer: []
 info:
   title: Orange API
   description: API of Discord Bot for Orange-Server.
