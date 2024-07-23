@@ -1,0 +1,34 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/chat/test": {
+      "get": {
+        "operationId": "ChatController_test",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "Orange API",
+    "description": "API of Discord Bot for Orange-Server.",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {}
+  }
+}

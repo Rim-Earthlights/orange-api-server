@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { RouterModule } from './modules/router.module';
+import * as path from 'path';
+import { writeFileSync } from 'fs';
 
 async function bootstrap() {
   const app = await NestFactory.create(RouterModule);
@@ -13,6 +15,10 @@ async function bootstrap() {
   .build();
 
   const document = SwaggerModule.createDocument(app, config);
+
+  const outputPath = path.resolve(process.cwd(), 'swagger.json');
+  writeFileSync(outputPath, JSON.stringify(document, null, 2), { encoding: 'utf8'});
+
   SwaggerModule.setup('docs', app, document);
 
   await app.listen(3000);
