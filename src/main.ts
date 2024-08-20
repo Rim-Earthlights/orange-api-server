@@ -4,6 +4,7 @@ import { dump } from 'js-yaml';
 import { RouterModule } from './modules/router.module';
 import * as path from 'path';
 import { writeFileSync } from 'fs';
+import { PrismaClient } from '@prisma/client';
 
 async function bootstrap() {
   const app = await NestFactory.create(RouterModule);
@@ -29,6 +30,13 @@ async function bootstrap() {
   );
 
   SwaggerModule.setup('docs', app, document);
+
+  const prisma = new PrismaClient();
+  await prisma.$connect().then(() => {
+  }).catch((error) => {
+    console.error('Failed to connect to database', error);
+    process.exit(1);
+  });
 
   await app.listen(3000);
 }
