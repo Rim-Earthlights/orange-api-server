@@ -5,9 +5,27 @@ import { RouterModule } from './modules/router.module';
 import * as path from 'path';
 import { writeFileSync } from 'fs';
 import { PrismaClient } from '@prisma/client';
+import { ValidationPipe } from '@nestjs/common';
+import { TypeOrm } from 'typeorm/typeorm';
+
+// BigIntのカスタム型定義を追加
+declare global {
+  interface BigInt {
+    toJSON(): string;
+  }
+}
+
+BigInt.prototype.toJSON = function () { return this.toString(); };
 
 async function bootstrap() {
+
+  await TypeOrm.dataSource.initialize().catch((e) => {
+    console.error('Failed to connect to database', e);
+    process.exit(1);
+  });
+
   const app = await NestFactory.create(RouterModule);
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
   const config = new DocumentBuilder()
     .setTitle('Orange API')

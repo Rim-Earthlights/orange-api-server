@@ -12,6 +12,99 @@ paths:
         - chat
       security:
         - bearer: []
+  /user:
+    get:
+      operationId: UserController_getAll
+      summary: get all users
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags: &ref_0
+        - user
+      security: &ref_1
+        - bearer: []
+    post:
+      operationId: UserController_create
+      summary: create user
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: created user
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *ref_0
+      security: *ref_1
+  /user/{id}:
+    get:
+      operationId: UserController_get
+      summary: get user by id
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+      tags: *ref_0
+      security: *ref_1
+    put:
+      operationId: UserController_update
+      summary: update user
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: updated user
+      tags: *ref_0
+      security: *ref_1
+  /guild/{id}:
+    get:
+      operationId: GuildController_get
+      summary: get guild by id
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+      tags: &ref_2
+        - guild
+      security: &ref_3
+        - bearer: []
+  /guild:
+    get:
+      operationId: GuildController_getAll
+      summary: get all guilds
+      parameters: []
+      responses:
+        '200':
+          description: OK
+      tags: *ref_2
+      security: *ref_3
 info:
   title: Orange API
   description: API of Discord Bot for Orange-Server.
@@ -25,4 +118,7 @@ components:
       scheme: bearer
       bearerFormat: JWT
       type: http
-  schemas: {}
+  schemas:
+    User:
+      type: object
+      properties: {}
