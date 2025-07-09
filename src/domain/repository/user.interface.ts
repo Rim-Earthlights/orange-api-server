@@ -1,4 +1,4 @@
-import { UserSetting } from 'src/infrastructure/persistence/typeorm/entities';
+import { UserSetting } from '../../infrastructure/persistence/typeorm/entities';
 import { Users } from '../../infrastructure/persistence/typeorm/entities/users';
 
 export interface IUserRepository {
