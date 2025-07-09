@@ -1,0 +1,18 @@
+export const LITELLM_MODEL = {
+  GPT_4_1: 'openai-gpt-41',
+  GPT_4_1_MINI: 'openai-gpt-41-mini',
+  GPT_4_1_NANO: 'openai-gpt-41-nano',
+  GPT_4O: 'openai-gpt-4o',
+  GPT_4O_MINI: 'openai-gpt-4o-mini',
+  GPT_O1: 'openai-gpt-o1',
+  GPT_O3: 'openai-o3',
+  GPT_O3_PRO: 'openai-o3-pro',
+  GPT_O3_MINI: 'openai-gpt-o3-mini',
+  ANTHROPIC_CLAUDE_3_5_HAIKU: 'anthropic-haiku-35',
+  ANTHROPIC_CLAUDE_3_7_SONNET: 'anthropic-sonnet-37',
+  ANTHROPIC_CLAUDE_3_7_SONNET_REASON: 'anthropic-sonnet-37-reasoning',
+  ANTHROPIC_CLAUDE_OPUS_4: 'anthropic-claude-opus-4',
+  ANTHROPIC_CLAUDE_SONNET_4: 'anthropic-claude-sonnet-4',
+  ANTHROPIC_CLAUDE_OPUS_4_THINKING: 'anthropic-claude-opus-4-thinking',
+  ANTHROPIC_CLAUDE_SONNET_4_THINKING: 'anthropic-claude-sonnet-4-thinking',
+} as const;
