@@ -46,6 +46,22 @@ export class UserController {
     return user;
   }
 
+  @Get(':user_id')
+  @ApiOperation({ summary: 'Get user by user ID' })
+  @ApiParam({ name: 'user_id', description: 'User ID' })
+  @ApiResponse({ status: 200, description: 'User found', type: UserResponseDto })
+  async getByUserId(@Param('user_id') userId: string): Promise<UserResponseDto> {
+    return await this.userRepository.findByUserId(userId);
+  }
+
+  @Get('guild/:guild_id')
+  @ApiOperation({ summary: 'Get all users in a guild' })
+  @ApiParam({ name: 'guild_id', description: 'Guild ID' })
+  @ApiResponse({ status: 200, description: 'Users found', type: [UserResponseDto] })
+  async getGuildUsers(@Param('guild_id') guildId: string): Promise<UserResponseDto[]> {
+    return await this.userRepository.getGuildUsers(guildId);
+  }
+
   @Post(':user_id')
   @ApiOperation({ summary: 'Create a new user' })
   @ApiParam({ name: 'user_id', description: 'User ID' })
@@ -72,22 +88,6 @@ export class UserController {
     return await this.userRepository.deleteUser(userId);
   }
 
-  @Get('guild/:guild_id')
-  @ApiOperation({ summary: 'Get all users in a guild' })
-  @ApiParam({ name: 'guild_id', description: 'Guild ID' })
-  @ApiResponse({ status: 200, description: 'Users found', type: [UserResponseDto] })
-  async getGuildUsers(@Param('guild_id') guildId: string): Promise<UserResponseDto[]> {
-    return await this.userRepository.getGuildUsers(guildId);
-  }
-
-  @Get(':user_id')
-  @ApiOperation({ summary: 'Get user by user ID' })
-  @ApiParam({ name: 'user_id', description: 'User ID' })
-  @ApiResponse({ status: 200, description: 'User found', type: UserResponseDto })
-  async getByUserId(@Param('user_id') userId: string): Promise<UserResponseDto> {
-    return await this.userRepository.findByUserId(userId);
-  }
-
   @Get('setting/:user_id')
   @ApiOperation({ summary: 'Get user settings' })
   @ApiParam({ name: 'user_id', description: 'User ID' })
@@ -101,7 +101,10 @@ export class UserController {
   @ApiParam({ name: 'user_id', description: 'User ID' })
   @ApiBody({ type: UserSettingRequestDto })
   @ApiResponse({ status: 201, description: 'User settings created successfully', type: Boolean })
-  async createUserSetting(@Body() userSetting: UserSettingRequestDto, @Param('user_id') userId: string): Promise<boolean> {
+  async createUserSetting(
+    @Body() userSetting: UserSettingRequestDto,
+    @Param('user_id') userId: string
+  ): Promise<boolean> {
     return await this.userRepository.createUserSetting(userId, userSetting);
   }
 

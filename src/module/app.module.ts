@@ -5,6 +5,7 @@ import { AppService } from '../application/use-cases/app.service';
 import { IAppService } from '../application/ports/inbound/app.service.interface';
 import * as Model from '../infrastructure/persistence/typeorm/entities';
 import { UserModule } from './user.module';
+import { ChatModule } from './chat.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { UserModule } from './user.module';
     }),
     TypeOrmModule.forFeature([Model.Users]),
     UserModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [
