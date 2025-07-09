@@ -13,8 +13,10 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiQuery, ApiParam, ApiBody, ApiExtraModels } from '@nestjs/swagger';
 import { IUserRepository } from '../../../domain/repository/user.interface';
-import { Users } from '../../persistence/typeorm/entities/users';
-import { UserSetting } from '../../persistence/typeorm/entities';
+import { UserResponseDto } from './dto/user-response.dto';
+import { UserSettingResponseDto } from './dto/user-setting-response.dto';
+import { UserRequestDto } from './dto/user-request.dto';
+import { UserSettingRequestDto } from './dto/user-setting-request.dto';
 
 @ApiTags('user')
 @Controller('user')
@@ -28,9 +30,9 @@ export class UserController {
   @ApiOperation({ summary: 'Get user by user ID and guild ID' })
   @ApiQuery({ name: 'user_id', description: 'User ID', required: true })
   @ApiQuery({ name: 'guild_id', description: 'Guild ID', required: true })
-  @ApiResponse({ status: 200, description: 'User found', type: Users })
+  @ApiResponse({ status: 200, description: 'User found', type: UserResponseDto })
   @ApiResponse({ status: 404, description: 'User not found' })
-  async getUser(@Query('user_id') userId: string, @Query('guild_id') guildId: string): Promise<Users> {
+  async getUser(@Query('user_id') userId: string, @Query('guild_id') guildId: string): Promise<UserResponseDto> {
     if (!userId || !guildId) {
       throw new NotFoundException('user_id and guild_id are required');
     }
@@ -47,18 +49,18 @@ export class UserController {
   @Post(':user_id')
   @ApiOperation({ summary: 'Create a new user' })
   @ApiParam({ name: 'user_id', description: 'User ID' })
-  @ApiBody({ type: Users })
+  @ApiBody({ type: UserRequestDto })
   @ApiResponse({ status: 201, description: 'User created successfully', type: Boolean })
-  async createUser(@Body() user: Users, @Param('user_id') userId: string): Promise<boolean> {
+  async createUser(@Body() user: UserRequestDto, @Param('user_id') userId: string): Promise<boolean> {
     return await this.userRepository.createUser({ ...user, id: userId });
   }
 
   @Put(':user_id')
   @ApiOperation({ summary: 'Update user information' })
   @ApiParam({ name: 'user_id', description: 'User ID' })
-  @ApiBody({ type: Users })
+  @ApiBody({ type: UserRequestDto })
   @ApiResponse({ status: 200, description: 'User updated successfully' })
-  async updateUser(@Body() user: Users, @Param('user_id') userId: string): Promise<{ result: number }> {
+  async updateUser(@Body() user: UserRequestDto, @Param('user_id') userId: string): Promise<{ result: number }> {
     return await this.userRepository.updateUser({ ...user, id: userId });
   }
 
@@ -73,43 +75,43 @@ export class UserController {
   @Get('guild/:guild_id')
   @ApiOperation({ summary: 'Get all users in a guild' })
   @ApiParam({ name: 'guild_id', description: 'Guild ID' })
-  @ApiResponse({ status: 200, description: 'Users found', type: [Users] })
-  async getGuildUsers(@Param('guild_id') guildId: string): Promise<Users[]> {
+  @ApiResponse({ status: 200, description: 'Users found', type: [UserResponseDto] })
+  async getGuildUsers(@Param('guild_id') guildId: string): Promise<UserResponseDto[]> {
     return await this.userRepository.getGuildUsers(guildId);
   }
 
   @Get(':user_id')
   @ApiOperation({ summary: 'Get user by user ID' })
   @ApiParam({ name: 'user_id', description: 'User ID' })
-  @ApiResponse({ status: 200, description: 'User found', type: Users })
-  async getByUserId(@Param('user_id') userId: string): Promise<Users> {
+  @ApiResponse({ status: 200, description: 'User found', type: UserResponseDto })
+  async getByUserId(@Param('user_id') userId: string): Promise<UserResponseDto> {
     return await this.userRepository.findByUserId(userId);
   }
 
   @Get('setting/:user_id')
   @ApiOperation({ summary: 'Get user settings' })
   @ApiParam({ name: 'user_id', description: 'User ID' })
-  @ApiResponse({ status: 200, description: 'User settings found', type: UserSetting })
-  async getUserSetting(@Param('user_id') userId: string): Promise<UserSetting> {
+  @ApiResponse({ status: 200, description: 'User settings found', type: UserSettingResponseDto })
+  async getUserSetting(@Param('user_id') userId: string): Promise<UserSettingResponseDto> {
     return await this.userRepository.findUserSetting(userId);
   }
 
   @Post('setting/:user_id')
   @ApiOperation({ summary: 'Create user settings' })
   @ApiParam({ name: 'user_id', description: 'User ID' })
-  @ApiBody({ type: UserSetting })
+  @ApiBody({ type: UserSettingRequestDto })
   @ApiResponse({ status: 201, description: 'User settings created successfully', type: Boolean })
-  async createUserSetting(@Body() userSetting: UserSetting, @Param('user_id') userId: string): Promise<boolean> {
+  async createUserSetting(@Body() userSetting: UserSettingRequestDto, @Param('user_id') userId: string): Promise<boolean> {
     return await this.userRepository.createUserSetting(userId, userSetting);
   }
 
   @Put('setting/:user_id')
   @ApiOperation({ summary: 'Update user settings' })
   @ApiParam({ name: 'user_id', description: 'User ID' })
-  @ApiBody({ type: UserSetting })
+  @ApiBody({ type: UserSettingRequestDto })
   @ApiResponse({ status: 200, description: 'User settings updated successfully' })
   async updateUserSetting(
-    @Body() userSetting: UserSetting,
+    @Body() userSetting: UserSettingRequestDto,
     @Param('user_id') userId: string
   ): Promise<{ result: number }> {
     return await this.userRepository.updateUserSetting(userId, userSetting);
